@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        img {
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+
+        strong {
+            font-size: 16px;
+            color: #333;
+        }
+
+        button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #c0392b;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            color: #3498db;
+            background-color: #fff;
+            border: 1px solid #3498db;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px;
+            font-size: 16px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Корзина</h1>
+    <ul>
+        {% for item in cart_items %}
+            <li>
+                <img src="{{ item.product.photo.url }}" alt="{{ item.product.name }}" width="50">
+                <strong>{{ item.product.name }}</strong> - {{ item.product.price }} ₽ x {{ item.quantity }}<br>
+                <form method="post" action="{% url 'update_cart_item' item.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </li>
+        {% empty %}
+            <li>Корзина пуста</li>
+        {% endfor %}
+    </ul>
+    <h2>Итого: {{ total_price }} ₽</h2>
+    <a href="{% url 'checkout' %}">Оформить заказ</a>
+    <a href="{% url 'index' %}">Продолжить покупки</a>
+</body>
+</html>

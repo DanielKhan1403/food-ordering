@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать категорию</title>
+    <link rel="stylesheet" href="{% static 'adminapp/category_form.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Создать новую категорию</h1>
+            <nav>
+                <a href="{% url 'food_list' %}" class="btn btn-primary">Back</a>
+            </nav>
+        </header>
+        <main>
+            <section class="category-form-section">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Создать категорию</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

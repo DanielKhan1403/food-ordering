@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню</title>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+<body>
+
+<div class="sidebar">
+    <h1>Категории:</h1>
+    <ul class="category-menu">
+        <li><a href="{% url 'index' %}">Все блюда</a></li>
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'category_foods' category.slug %}">{{ category.name }}</a>
+            </li>
+        {% empty %}
+            <li>Нет доступных категорий</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="content">
+    {% for food in foods %}
+        <div class="card">
+            <img src="{{ food.photo.url }}" alt="{{ food.name }}">
+            <div class="card-details">
+                <strong>{{ food.name }}</strong> - {{ food.price }} ₽<br>
+                <em>{{ food.description }}</em><br>
+                <a href="{% url 'add_to_cart' food.id %}" class="btn btn-add-to-cart">Добавить в корзину</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>Нет доступной еды.</p>
+    {% endfor %}
+</div>
+
+<div class="cart-link">
+    <a href="{% url 'cart' %}">
+        <img src="{% static 'cart.jpg' %}" alt="Корзина">
+        Корзина ({{ request.session.cart_items|default:0 }}) - {{ request.session.cart_total|default:'0.00' }} ₽
+    </a>
+</div>
+
+<div class="order-history">
+    <a href="{% url 'order_history' %}" class="btn btn-primary">История заказов</a>
+</div>
+
+<div class="profile-edit">
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Редактировать профиль</a>
+</div>
+
+<div class="logout">
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-logout">Выход</button>
+    </form>
+</div>
+
+</body>
+</html>

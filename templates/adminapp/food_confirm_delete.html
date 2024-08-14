@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Food</title>
+    <link rel="stylesheet" href="{% static 'adminapp/food_confirm_delete.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Food</h1>
+        <form method="post">
+            {% csrf_token %}
+            <p>Are you sure you want to delete "{{ object.name }}"?</p>
+            <button type="submit" class="btn">Confirm</button>
+            <a href="{% url 'food_list' %}" class="btn btn-back">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

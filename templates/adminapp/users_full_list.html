@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client List</title>
+    <link rel="stylesheet" href="{% static 'adminapp/user_full_list.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Client List</h1>
+            <nav>
+                <a href="{% url 'food_list' %}" class="btn btn-primary">Back</a>
+            </nav>
+        </header>
+        <main>
+            <section class="client-list-section">
+                <ul class="client-list">
+                    {% for user in users %}
+                        <li class="client-item">
+                            <span class="client-name">{{ user.username }}</span>
+                            <a href="{% url 'user_order_history' user.id %}" class="btn btn-view">Show Order History</a>
+                        </li>
+                    {% empty %}
+                        <li class="client-item">No clients available.</li>
+                    {% endfor %}
+                </ul>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История заказов</title>
+    <link rel="stylesheet" href="{% static 'adminapp/user_order_history.css' %}">
+</head>
+<body>
+ <a href="{% url 'food_list' %}" class="button">Назад</a>
+    <h1>История заказов пользователя {{ user.username }}</h1>
+
+    <ul class="order-list">
+        {% for order in orders %}
+            <li class="order-item">
+                <strong>Заказ {{ order.id }} от {{ order.created_at }}</strong>
+                <ul class="product-list">
+                    {% for item in order_items %}
+                        {% if item.order_id == order.id %}
+                            <li class="product-item">
+                                {{ item.product.name }} - Количество: {{ item.quantity }} - Цена: {{ item.price }}
+                            </li>
+                        {% endif %}
+                    {% empty %}
+                        <li>Нет продуктов в заказе</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+            <li>Заказы отсутствуют</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

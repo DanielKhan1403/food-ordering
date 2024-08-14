@@ -1,0 +1,75 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.profile-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.profile-container .info-group {
+    margin-bottom: 20px;
+}
+
+.profile-container .info-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.profile-container .info-group p {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.profile-container .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.profile-container .buttons a, .profile-container .buttons form button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-container .buttons a {
+    background-color: #007bff;
+}
+
+.profile-container .buttons a:hover {
+    background-color: #0056b3;
+}
+
+.profile-container .buttons form button {
+    background-color: #dc3545;
+}
+
+.profile-container .buttons form button:hover {
+    background-color: #c82333;
+}
